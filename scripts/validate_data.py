@@ -21,7 +21,7 @@ def main():
     df = pd.read_csv(DATA_PATH)
 
     context = gx.get_context()
-    data_source = context.datasources.add_pandas("pandas_src")
+    data_source = context.data_sources.add_pandas("pandas_src")
     data_asset = data_source.add_dataframe_asset(name="train_asset")
     batch_definition = data_asset.add_batch_definition_whole_dataframe("batch_def")
     batch = batch_definition.get_batch(batch_parameters={"dataframe": df})
