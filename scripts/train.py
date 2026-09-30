@@ -31,7 +31,7 @@ def main():
     # Gunakan tracking lokal SQLite saat dijalankan di laptop
     # Gunakan folder mlruns saat dijalankan di GitHub Actions
     if os.getenv("GITHUB_ACTIONS") == "true":
-        mlflow.set_tracking_uri("file:./mlruns")
+        mlflow.set_tracking_uri("sqlite:///mlflow_ci.db")
     else:
         mlflow.set_tracking_uri("sqlite:///mlflow.db")
 
