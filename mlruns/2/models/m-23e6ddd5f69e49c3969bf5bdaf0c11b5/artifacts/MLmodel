@@ -1,0 +1,23 @@
+artifact_path: file:///C:/Users/Dhea/Documents/1 ODP BNI/MLOps Training/mlruns/2/models/m-23e6ddd5f69e49c3969bf5bdaf0c11b5/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.10.6
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: pickle
+    sklearn_version: 1.7.2
+    skops_trusted_types: null
+mlflow_version: 3.16.1
+model_id: m-23e6ddd5f69e49c3969bf5bdaf0c11b5
+model_size_bytes: 4391331
+model_uuid: m-23e6ddd5f69e49c3969bf5bdaf0c11b5
+prompts: null
+run_id: 0b038d61fcd64fe2bd10b780aa66cb40
+utc_time_created: '2026-09-30 06:44:47.949041'

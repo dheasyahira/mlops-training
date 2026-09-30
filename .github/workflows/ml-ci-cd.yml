@@ -21,3 +21,5 @@ jobs:
 
       - name: Cek model gate
         run: python scripts/check_model_gate.py 0.70
+
+        
