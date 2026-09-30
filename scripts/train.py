@@ -7,6 +7,7 @@ Jalankan 3x dengan kombinasi parameter berbeda, bandingkan AUC di MLflow UI:
 Lalu: mlflow ui  -> buka experiment "training-siang", urutkan kolom AUC.
 """
 import sys
+import os
 import mlflow
 import mlflow.sklearn
 from sklearn.ensemble import RandomForestClassifier
@@ -26,9 +27,16 @@ def main():
     X_train, X_test, y_train, y_test = train_test_split(
         df.drop("target", axis=1), df["target"],
         test_size=0.2, random_state=42)
-    #tambah code
-    mlflow.set_tracking_uri("sqlite:///mlflow.db")
+
+    # Gunakan tracking lokal SQLite saat dijalankan di laptop
+    # Gunakan folder mlruns saat dijalankan di GitHub Actions
+    if os.getenv("GITHUB_ACTIONS") == "true":
+        mlflow.set_tracking_uri("file:./mlruns")
+    else:
+        mlflow.set_tracking_uri("sqlite:///mlflow.db")
+
     mlflow.set_experiment("training-siang")
+
     with mlflow.start_run():
         model = RandomForestClassifier(
             n_estimators=n_estimators,
@@ -42,8 +50,7 @@ def main():
         mlflow.log_param("n_estimators", n_estimators)
         mlflow.log_param("max_depth", max_depth)
         mlflow.log_metric("auc", auc)
-        # serialization_format="pickle" -> hindari error "untrusted types" dari
-        # format skops default pada beberapa versi mlflow/scikit-learn terbaru
+
         mlflow.sklearn.log_model(
             model, "model", serialization_format="pickle"
         )
